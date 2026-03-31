@@ -3,27 +3,27 @@ QuickChat es software libre: usted puede redistribuirlo y/o modificarlo
 bajo los términos de la Licencia Pública General GNU v2 publicada por
 la Free Software Foundation.
  * ╔══════════════════════════════════════════════════════════════════╗
- * ║        QuickChat S3                                                                    ║
- * ║        ESP32-S3 Freenove WROOM                                                         ║
+ * ║        QuickChat S3                                              ║
+ * ║        ESP32-S3 Freenove WROOM                                   ║
  * ╠══════════════════════════════════════════════════════════════════╣
- * ║  CARACTERÍSTICAS:                                                                      ║
- * ║  ✅ WiFi AP + WebServer (puerto 80) + WebSockets (81)                                  ║
- * ║  ✅ OLED 128x64 con emojis Unicode → glifos propios                                    ║
- * ║  ✅ Registro de usuarios: IP → Nombre (LittleFS JSON)                                  ║
- * ║  ✅ Historial de chat persistente en LittleFS                                          ║
- * ║  ✅ FreeRTOS Dual-Core: OLED en Core 1, red en Core 0                                  ║
- * ║  ✅ UI Web de diseño oscuro premium, animada                                           ║
- * ║  ✅ GET /reset → borrar todo el chat                                                   ║
- * ║  ✅ Thread-safe con mutex y secciones críticas                                         ║
+ * ║  CARACTERÍSTICAS:                                                ║
+ * ║  ✅ WiFi AP + WebServer (puerto 80) + WebSockets (81)           ║
+ * ║  ✅ OLED 128x64 con emojis Unicode → glifos propios             ║
+ * ║  ✅ Registro de usuarios: IP → Nombre (LittleFS JSON)           ║
+ * ║  ✅ Historial de chat persistente en LittleFS                   ║
+ * ║  ✅ FreeRTOS Dual-Core: OLED en Core 1, red en Core 0           ║
+ * ║  ✅ UI Web de diseño oscuro premium, animada                    ║
+ * ║  ✅ GET /reset → borrar todo el chat                            ║
+ * ║  ✅ Thread-safe con mutex y secciones críticas                  ║
  * ╠══════════════════════════════════════════════════════════════════╣
- * ║  LIBRERÍAS (Instalar via Arduino Library Manager):                                     ║
- * ║  • Adafruit SSD1306  + Adafruit GFX Library                                            ║
- * ║  • WebSockets  (Markus Sattler)                                                        ║
- * ║  • ArduinoJson (Benoit Blanchon) ← para la BD de usuarios                              ║
+ * ║  LIBRERÍAS (Instalar via Arduino Library Manager):               ║
+ * ║  • Adafruit SSD1306  + Adafruit GFX Library                      ║
+ * ║  • WebSockets  (Markus Sattler)                                  ║
+ * ║  • ArduinoJson (Benoit Blanchon) ← para la BD de usuarios        ║
  * ╠══════════════════════════════════════════════════════════════════╣
- * ║  • Especificaciones:                                                                   ║
- * ║  • Nombre de red: QuickChat                                                            ║
- * ║  • Contraseña: 12345678                                                                ║                                                            ║
+ * ║  • Especificaciones:                                             ║
+ * ║  • Nombre de red: QuickChat                                      ║
+ * ║  • Contraseña: 12345678                                          ║
  * ╚══════════════════════════════════════════════════════════════════╝
  */
 
