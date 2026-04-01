@@ -1,4 +1,4 @@
-# 🚀 QuickChat S3: Enterprise-Grade Offline Messaging Node
+# 🚀 QuickChat S3: Offline Messaging Node
 
 QuickChat S3 es un servidor de mensajería instantánea **100% autónomo** y de baja latencia desarrollado para el **ESP32-S3**. El proyecto implementa una arquitectura distribuida localmente (Edge Computing) para garantizar privacidad total y disponibilidad en escenarios sin infraestructura de red (Off-Grid).
 
