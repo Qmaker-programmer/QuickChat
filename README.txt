@@ -1,41 +1,42 @@
-# QuickChat S3 🚀
+# 🚀 QuickChat S3: Mini Servidor de Mensajería Offline
 
-QuickChat es un sistema de mensajería instantánea ligero y autónomo diseñado específicamente para el **ESP32-S3 (Freenove WROOM)**. Permite crear una red de chat local sin necesidad de internet, utilizando un punto de acceso WiFi (AP) y una interfaz web moderna.
+QuickChat es un sistema de mensajería instantánea ligero y **100% autónomo** diseñado para el **ESP32-S3**. Permite crear una red de chat privada sin necesidad de internet, ideal para comunicaciones locales, privacidad total o situaciones de emergencia.
+
+## 📸 Vista Previa
+| 📱 Interfaz "Obsidian Dark" | ⚡ Hardware en Acción |
+| :---: | :---: |
+| <img src="IMG_DE_TU_SCREENSHOT.jpg" width="300"> | <img src="IMG_DE_TU_ESP32.jpg" width="300"> |
+*El sistema combina una web moderna con respuesta en tiempo real en la pantalla OLED.*
 
 ## ✨ Características Principales
-* **Infraestructura Autónoma**: Funciona como WiFi AP con WebServer (puerto 80) y WebSockets (puerto 81) integrados.
-* **Visualización Dual**: Los mensajes se muestran tanto en la interfaz web como en una pantalla OLED 128x64 con soporte de emojis Unicode convertidos a glifos ASCII.
-* **Persistencia de Datos**: Registro de usuarios (IP → Nombre) e historial de chat almacenados de forma persistente en el sistema de archivos **LittleFS**.
-* **Rendimiento Optimizado**: Implementación mediante **FreeRTOS Dual-Core**, gestionando la pantalla OLED en el Core 1 y la red en el Core 0.
-* **Seguridad y Robustez**: Sistema *thread-safe* con uso de mutex y secciones críticas para la gestión del estado global.
-* **Interfaz Premium**: UI web con diseño oscuro tipo "Obsidian Dark", animada y optimizada para dispositivos móviles.
+* **Infraestructura Totalmente Autónoma**: Funciona como WiFi AP con WebServer (puerto 80) y WebSockets (puerto 81).
+* **Visualización Dual**: Mensajes en tiempo real en la web y en pantalla OLED 128x64 (con soporte de emojis).
+* **Persistencia con LittleFS**: El historial de chat y el registro de usuarios (IP → Nombre) no se borran al apagar el dispositivo.
+* **Arquitectura Dual-Core**: Optimizado con **FreeRTOS**; el Core 0 gestiona la red y el Core 1 la interfaz OLED.
+* **Diseño Premium**: Interfaz web oscura tipo "Obsidian", con animaciones suaves y optimizada para móviles.
 
-## 🛠️ Requisitos de Hardware
-* **Microcontrolador**: ESP32-S3 (Probado en Freenove WROOM).
+## 🛠️ Especificaciones Técnicas
+* **Microcontrolador**: ESP32-S3 (Freenove WROOM).
 * **Pantalla**: OLED SSD1306 128x64 (I2C).
-    * SDA: Pin 8
-    * SCL: Pin 9
+    * `SDA: Pin 8` | `SCL: Pin 9`
+* **Alimentación**: 
+    * *Actual*: 4 pilas AA en serie (6V) al pin 5V.
+    * *Soportado*: Batería LiPo 3.7V con módulo de carga TP4056.
 
-## 📚 Librerías Necesarias
-Es necesario instalar las siguientes librerías desde el Arduino Library Manager:
-1.  **Adafruit SSD1306** + **Adafruit GFX Library**.
-2.  **WebSockets** (de Markus Sattler).
-3.  **ArduinoJson** (de Benoit Blanchon).
+## 📚 Requisitos de Software
+Instalar desde el *Library Manager* de Arduino:
+1. **Adafruit SSD1306** + **Adafruit GFX**.
+2. **WebSockets** (de Markus Sattler).
+3. **ArduinoJson** (de Benoit Blanchon).
 
-## ⚙️ Configuración por Defecto
-Al iniciar, el dispositivo creará una red con las siguientes credenciales:
-* **SSID**: `QuickChat`
-* **Contraseña**: `12345678`
-* **Acceso Web**: `http://192.168.4.1`
+## ⚙️ Inicio Rápido
+1. Carga el código `QuickChat.ino` en tu ESP32-S3.
+2. Conéctate a la red WiFi generada:
+   - **SSID**: `QuickChat`
+   - **Password**: `12345678`
+3. Abre tu navegador en: `http://192.168.4.1`
 
-## 🚀 Instalación
-1.  Asegúrate de tener configurado el soporte para ESP32 en tu IDE de Arduino.
-2.  Instala las librerías mencionadas anteriormente.
-3.  Carga el código `QuickChat.ino` en tu placa ESP32-S3.
-4.  Conéctate a la red WiFi "QuickChat" desde tu móvil o PC y abre el navegador.
-
-## 📋 Comandos Administrativos
-* Para resetear y borrar todo el historial del chat, accede a: `http://192.168.4.1/reset`.
+> ⚠️ **Nota de Admin**: Para resetear todo el historial y usuarios, visita `http://192.168.4.1/reset`.
 
 ---
-*Este software se distribuye bajo los términos de la Licencia Pública General GNU v2.
+🛡️ *Software distribuido bajo la Licencia Pública General **GNU v2**.* 
