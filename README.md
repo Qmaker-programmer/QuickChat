@@ -5,7 +5,7 @@ QuickChat es un sistema de mensajería instantánea ligero y **100% autónomo** 
 ## 📸 Vista Previa
 | 📱 Interfaz "Obsidian Dark" | ⚡ Hardware en Acción |
 | :---: | :---: |
-| <img src="images/Screenshot_20260331_221717_com.android.chrome.jpg" width="300"> | <img src="images/IMG_20260331_221138.jpg" width="300"> |
+| <img src="images/Screenshot_20260331_221717_com.android.chrome.jpg" width="300"> | <img src="images/IMG_20260331_224530.jpg" width="300"> |
 *El sistema combina una web moderna con respuesta en tiempo real en la pantalla OLED.*
 
 ## ✨ Características Principales
