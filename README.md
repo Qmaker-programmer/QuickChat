@@ -1,42 +1,51 @@
-# 🚀 QuickChat S3: Mini Servidor de Mensajería Offline
+# 🚀 QuickChat S3: Enterprise-Grade Offline Messaging Node
 
-QuickChat es un sistema de mensajería instantánea ligero y **100% autónomo** diseñado para el **ESP32-S3**. Permite crear una red de chat privada sin necesidad de internet, ideal para comunicaciones locales, privacidad total o situaciones de emergencia.
+QuickChat S3 es un servidor de mensajería instantánea **100% autónomo** y de baja latencia desarrollado para el **ESP32-S3**. El proyecto implementa una arquitectura distribuida localmente (Edge Computing) para garantizar privacidad total y disponibilidad en escenarios sin infraestructura de red (Off-Grid).
 
 ## 📸 Vista Previa
-| 📱 Interfaz "Obsidian Dark" | ⚡ Hardware en Acción |
+| 📱 UI "Obsidian Dark" (Frontend) | ⚡ Hardware en Acción (Backend) |
 | :---: | :---: |
 | <img src="images/Screenshot_20260331_221717_com.android.chrome.jpg" width="300"> | <img src="images/IMG_20260331_224530.jpg" width="300"> |
-*El sistema combina una web moderna con respuesta en tiempo real en la pantalla OLED.*
 
-## ✨ Características Principales
-* **Infraestructura Totalmente Autónoma**: Funciona como WiFi AP con WebServer (puerto 80) y WebSockets (puerto 81).
-* **Visualización Dual**: Mensajes en tiempo real en la web y en pantalla OLED 128x64 (con soporte de emojis).
-* **Persistencia con LittleFS**: El historial de chat y el registro de usuarios (IP → Nombre) no se borran al apagar el dispositivo.
-* **Arquitectura Dual-Core**: Optimizado con **FreeRTOS**; el Core 0 gestiona la red y el Core 1 la interfaz OLED.
-* **Diseño Premium**: Interfaz web oscura tipo "Obsidian", con animaciones suaves y optimizada para móviles.
+## 🏗️ Arquitectura del Sistema (Deep Dive)
 
-## 🛠️ Especificaciones Técnicas
-* **Microcontrolador**: ESP32-S3 (Freenove WROOM).
-* **Pantalla**: OLED SSD1306 128x64 (I2C).
-    * `SDA: Pin 8` | `SCL: Pin 9`
-* **Alimentación**: 
-    * *Actual*: 4 pilas AA en serie (6V) al pin 5V.
-    * *Soportado*: Batería LiPo 3.7V con módulo de carga TP4056.
+A diferencia de las implementaciones estándar, QuickChat utiliza un enfoque de **procesamiento paralelo** aprovechando los dos núcleos del ESP32-S3:
 
-## 📚 Requisitos de Software
-Instalar desde el *Library Manager* de Arduino:
-1. **Adafruit SSD1306** + **Adafruit GFX**.
-2. **WebSockets** (de Markus Sattler).
-3. **ArduinoJson** (de Benoit Blanchon).
+* **Core 0 (Network Stack & API):** Gestiona el Soft Access Point, el servidor HTTP asíncrono y el broker de WebSockets.
+* **Core 1 (UI Engine & I/O):** Renderizado de la interfaz OLED 128x64 y gestión de glifos Unicode/Emoji.
+* **Inter-Core Sync:** Uso de **Mutexes** y secciones críticas de FreeRTOS para garantizar la integridad de los datos en el historial compartido.
 
-## ⚙️ Inicio Rápido
-1. Carga el código `QuickChat.ino` en tu ESP32-S3.
-2. Conéctate a la red WiFi generada:
-   - **SSID**: `QuickChat`
-   - **Password**: `12345678`
-3. Abre tu navegador en: `http://192.168.4.1`
+### ⚙️ Stack Tecnológico
+* **Networking:** WebSockets (RFC 6455) para comunicación Full-Duplex.
+* **Storage Engine:** **LittleFS** con serialización **JSON** (ArduinoJson 6/7) para persistencia de estado (IP-User Mapping) e historial de mensajes.
+* **Memory Management:** Optimización de buffers para evitar fragmentación de HEAP durante el broadcast de mensajes.
 
-> ⚠️ **Nota de Admin**: Para resetear todo el historial y usuarios, visita `http://192.168.4.1/reset`.
+## 🛠️ Especificaciones de Hardware
+* **MCU:** ESP32-S3 (Dual-Core Xtensa® LX7, 240MHz).
+* **Display:** OLED SSD1306 (I2C) - Bus de 400kHz.
+    * `SDA: GPIO 8` | `SCL: GPIO 9`
+* **Protocolo:** IEEE 802.11 b/g/n (SoftAP Mode).
+* **Power:** 5V-6V via VCC/USB. Compatible con LiPo + TP4056.
+
+## 📚 Dependencias de Software
+El proyecto requiere las siguientes librerías (disponibles en Arduino Library Manager):
+1.  **Adafruit SSD1306** & **GFX**: Renderizado de bajo nivel.
+2.  **WebSockets** (Markus Sattler): Motor de tiempo real.
+3.  **ArduinoJson**(de Benoit Blanchon): Parsing eficiente de tramas de chat.
+
+## 🚀 Implementación y Deployment
+
+1.  **Configuración del IDE**: Seleccionar placa `ESP32-S3 Dev Module`.
+2.  **Particionado de Memoria**: Se recomienda un esquema con al menos **1MB de SPIFFS/LittleFS**.
+3.  **Flash**: Cargar `QuickChat.ino`.
+4.  **Acceso**:
+    * **SSID**: `QuickChat` (WPA2: `12345678`).
+    * **Gateway**: `http://192.168.4.1`.
+
+### 🛠️ Endpoints Administrativos
+* `GET /reset`: Formatea la partición LittleFS y purga la base de datos de usuarios/mensajes.
+* `GET /users`: Retorna un JSON con el mapeo actual de dispositivos conectados.
 
 ---
-🛡️ *Software distribuido bajo la Licencia Pública General **GNU v2**.* 
+🛡️ **Licencia**: Distribuido bajo **GNU GPL v2**. Consulta el archivo `LICENSE` para más detalles.
+Desarrollado para la comunidad Maker!🛠️
