@@ -26,6 +26,7 @@ A diferencia de las implementaciones estándar, QuickChat utiliza un enfoque de 
     * `SDA: GPIO 8` | `SCL: GPIO 9`
 * **Protocolo:** IEEE 802.11 b/g/n (SoftAP Mode).
 * **Power:** 5V-6V via VCC/USB. Compatible con LiPo + TP4056.
+* <img src="diagram.png" width="300">
 
 ## 📚 Dependencias de Software
 El proyecto requiere las siguientes librerías (disponibles en Arduino Library Manager):
